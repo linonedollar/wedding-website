@@ -55,6 +55,43 @@
                 <link rel="stylesheet" href="node_modules/animate.css/animate.min.css" onerror="loadCssFromCDN('animate.css')">
                 <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" onerror="loadCssFromCDN('font-awesome.css')">
                 <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+                
+                <style>
+                    .countdown {
+                        background-color: #ffffff;
+                        border-radius: 15px;
+                        padding: 40px;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                        text-align: center;
+                    }
+            
+                    .countdown h1 {
+                        font-size: 2.5rem;
+                        margin-bottom: 30px;
+                    }
+            
+                    .time-box {
+                        display: flex;
+                        justify-content: space-around;
+                    }
+            
+                    .time-box div {
+                        font-size: 2rem;
+                        font-weight: bold;
+                        color: #007bff;
+                        background-color: white;
+    box-shadow: 0 4px 14px 1px rgba(0, 0, 0, 0.16);
+    width: 76px;
+    height: 76px;padding-top: 10px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+                    }
+            
+                    .time-box span {
+                        display: block;
+                        color: #6c757d;
+                    }
+                </style>
             </head>
             <body id="top">
                 <!--[if lt IE 8]>
@@ -122,6 +159,29 @@
                                             是不計得失的支持。感謝一路相伴的家人朋友。許久未見，甚是想念。
                                         </p>
                                         <p class="date">2024.10.23 我們，婚禮見~</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="countdown">
+                            <h3 class="header">距離婚禮倒數</h3>
+                            <div class="time-box">
+                                <div>
+                                    <span id="days"></span>
+                                    <span>天</span>
+                                </div>
+                                <div>
+                                    <span id="hours"></span>
+                                    <span>時</span>
+                                </div>
+                                <div>
+                                    <span id="minutes"></span>
+                                    <span>分</span>
+                                </div>
+                                <div>
+                                    <span id="seconds"></span>
+                                    <span>秒</span>
                                 </div>
                             </div>
                         </div>
@@ -337,8 +397,6 @@
                                                 </div><!-- /.modal-content -->
                                                 </div><!-- /.modal-dialog -->
                                                 </div><!-- /.modal -->
-                                                <br>
-                                                <br>
                                                 <div class="container">
                                                     <div class="row">
                                                         <div class="col-md-6 col-md-offset-3">
@@ -392,7 +450,7 @@
                                             <script src="js/jquery.flexslider-min.js"></script>
                                             <script src="js/jquery.mb.YTPlayer.min.js"></script>
                                             <script src="js/vendor/ouical.js"></script>
-                                            <script src="js/scripts.min.js"></script>
+                                            <script src="js/scripts.min.js"></script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
                                             <script async defer
                                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBlPw3GQYI3faa_9mRE6plWuM7xNEmrwH0&callback=initMap"></script>
                                             <!-- Google Analytics -->
@@ -410,6 +468,31 @@
                                             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
                                             ga('create', 'UA-46465113-4', 'auto');
                                             ga('send', 'pageview');
+                                            </script>
+                                             <script>
+                                                // 設定倒數的目標日期
+                                                var countDownDate = new Date("Oct 23, 2024 11:00:00").getTime();
+                                        
+                                                // 更新倒數計時器
+                                                var countdownfunction = setInterval(function() {
+                                                    var now = new Date().getTime();
+                                                    var distance = countDownDate - now;
+                                        
+                                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        
+                                                    document.getElementById("days").innerHTML = days;
+                                                    document.getElementById("hours").innerHTML = hours;
+                                                    document.getElementById("minutes").innerHTML = minutes;
+                                                    document.getElementById("seconds").innerHTML = seconds;
+                                        
+                                                    if (distance < 0) {
+                                                        clearInterval(countdownfunction);
+                                                        document.querySelector(".countdown").innerHTML = "<h1>婚禮開始了！</h1>";
+                                                    }
+                                                }, 1000);
                                             </script>
                                         </body>
                                     </html>
